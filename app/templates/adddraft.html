@@ -1,0 +1,37 @@
+<p>OR</p>
+<h2>Create Draft</h2>
+<p class="alert alert-success" ng-show="addSuccess">Draft Added Successfully!</p>
+<p class="alert alert-danger" ng-show="addFailure">Add Failed, check logs...</p>
+<form id="newDraftForm" role="form" name="draftForm" novalidate>
+	<div class="row">
+		<div class="form-group col-md-3">
+			<label for="lName">League Name</label>
+			<input id="lName" type="text" class="form-control" ng-model="newDraft.leagueName" placeholder="name" required />
+		</div>
+		<div class="form-group col-md-3">
+			<label for="lSize">League Size</label>
+			<input id="lSize" type="text" class="form-control" ng-model="newDraft.size" placeholder="size" required />
+		</div>
+
+    </div>
+    <div class="checkbox">
+        <label for="ppr"><input id="ppr" type="checkbox" ng-model="newDraft.isPPR"/>PPR Leauge?</label>
+    </div>
+    <fieldset>
+        <legend>Flex Eligible Positions</legend>
+        <div class="checkbox">
+            <label for="rb"><input id="rb" type="checkbox" ng-model="newDraft.flex.RB"/>RB</label>
+        </div>
+        <div class="checkbox">
+            <label for="wr"><input id="wr" type="checkbox" ng-model="newDraft.flex.WR"/>WR</label>
+        </div><div class="checkbox">
+        <label for="te"><input id="te" type="checkbox" ng-model="newDraft.flex.TE"/>TE</label>
+    </div>
+
+    </fieldset>
+
+    <hr/>
+	<button class="btn btn-primary" ng-click="addDraft()" ng-disabled="draftForm.$invalid || isUnchanged(newDraft)">Create</button>
+</form>
+		
+	

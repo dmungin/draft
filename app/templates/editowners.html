@@ -1,0 +1,37 @@
+<h3>Edit Owners</h3>
+<p class="alert alert-success" ng-show="ec.updateSuccess">Owners Updated Successfully!</p>
+<p class="alert alert-success" ng-show="ec.revertSuccess">Owners Reverted Successfully!</p>
+<p class="alert alert-success" ng-show="ec.importSuccess">Owners Imported Successfully!</p>
+<p class="alert alert-danger" ng-show="ec.updateFailure">Owners Failed, check logs...</p>
+<form id="ownersForm" role="form" name="ownerForm" novalidate>
+    <div class="row form-horizontal">
+        <div class="form-group col-md-6">
+            <label class="col-md-3 control-label" for="otherDrafts">Import Owners</label>
+            <div class="col-md-9">
+                <select id="otherDrafts" class="form-control" ng-model="ec.otherDraft" ng-options="draft.leagueName for draft in dc.drafts | filter:!ec.currentDraft.draft">
+                    <option value="">-- Choose A Draft --</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-1">
+            <a class="btn btn-primary pull-right" ng-click="em.importOwners()">Import</a>
+        </div>
+    </div>
+	<div ng-repeat="owner in em.currentDraft.owners | orderBy : 'draftPosition'" class="row">
+		<div class="form-group col-md-3">
+			<label class="sr-only" for="ownerName" >Owner Name</label>
+			<input type="text" class="form-control" class="form-control" ng-model="owner.ownerName"  id="ownerName" placeholder="Owner Name" required />
+		</div>
+		<div class="form-group col-md-3">
+			<label class="sr-only" for="teamName">Team Name</label>
+			<input type="text" class="form-control" class="form-control" ng-model="owner.nickname" id="teamName" placeholder="Team Name" required />
+		</div>
+		<div class="form-group col-md-1">
+			<label class="sr-only" for="draftPosition">Draft Position</label>
+			<input id="draftPosition" type="number" class="form-control" ng-model="owner.draftPosition" required />
+		</div>
+	</div>
+    <hr/>
+	<button class="btn btn-primary" ng-click="em.saveOwners()" ng-disabled="em.ownerForm.$invalid || isUnchanged(team)">Save Changes</button>
+	<button class="btn btn-link" ng-click="em.revertOwners()">Revert Changes</button>
+</form>

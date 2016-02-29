@@ -1,0 +1,239 @@
+#selectedDraftHeader h2 {
+    float: left;
+}
+#selectedDraftHeader a {
+    float: right;
+    margin-top: 25px;
+}
+.onTheClock {
+    border: 1px solid #e1e1e8;
+    background-color: #f7f7f9;
+}
+#teamTables {
+    width: 1140px;
+    float: left;
+}
+#teamTables :nth-child(4),
+#teamTables :nth-child(7) {
+    clear: both;
+}
+tr.keeper_true {
+    background-color: #A9C5DD;
+    color: #fff;
+}
+tr.pick_ineligible {
+    background-color: #D9534F;
+    color: #fff;
+}
+tr.picked_true {
+    background-color: #777;
+    color: #333;
+}
+tr.pick_ineligible td:last-child a {
+    display: none;
+}
+tr.taken {
+    background-color: #428bca;
+    text-decoration: line-through;
+}
+tr.taken.mine {
+    background-color: #00abea;
+    text-decoration: none;
+    color: white;
+}
+.hidden,
+.hideTaken tr.taken,
+tr.searchFiltered {
+    display: none;
+}
+#liveDraftForm {
+    margin-top: 20px;
+}
+#liveDraftForm  .form-control-static .btn {
+    padding: 0;
+    margin-left: 10px;
+}
+#liveDraftForm hr {
+    margin-bottom: 10px;
+}
+#timerControls .btn {
+    padding-left: 0;
+}
+#playerList .btn-link {
+
+}
+
+#keeperList td,
+#playerList td {
+    vertical-align: middle;
+}
+#keeperList tr td:nth-child(3) {
+    width: 18%;
+}
+#keeperList tr td:nth-child(1) {
+    width: 18%;
+}
+#keeperList tr td:nth-child(4) {
+    width: 25%;
+}
+#teamTables tr td:nth-child(3) {
+    width: 20%;
+}
+#rankings .btn.btn-link {
+    padding: 0;
+}
+#rankings.visibleQB tr.QB,
+#rankings.visibleRB tr.RB,
+#rankings.visibleWR tr.WR,
+#rankings.visibleTE tr.TE,
+#rankings.visibleDEF tr.DEF,
+#rankings.visibleK tr.K  {
+    display: table-row;
+}
+tbody#rankings tr,
+tbody#rankings.hidePicked tr.picked_true  {
+    display: none;
+}
+#positionFilters {
+    margin-bottom: 24px;
+}
+#positionFilters .btn {
+    margin-top: 20px;
+    width: 105px;
+}
+#picksTable {
+    float: left;
+    margin-bottom: 20px;
+    width: 100%;
+}
+#picksTable .pick {
+    float: left;
+    height: 75px;
+    font-size: 10px;
+    text-align: center;
+    border: 1px solid #DDDDDD;
+    padding: 5px;
+    margin: -1px 0 0 -1px;
+    color: #333;
+}
+#picksTable .pick.QB,
+#picksTable .pick.WR,
+#picksTable .pick.TE,
+#picksTable .pick.RB,
+#picksTable .pick.K,
+#picksTable .pick.DEF {
+    color: #fff;
+}
+#picksTable .pick.QB {
+    background-color: #06b942;
+}
+#picksTable .pick.WR {
+    background-color: #02daff;
+}
+#picksTable .pick.TE {
+    background-color: #a212ff;
+}
+#picksTable .pick.RB {
+    background-color: #E82D47;
+}
+#picksTable .pick.K {
+    background-color: #e8dc05;
+}
+#picksTable .pick.DEF {
+    background-color: #ff8e00;
+}
+table .tablesort-asc,
+table .tablesort-desc {
+    background-color: #fff;
+}
+/* Theme Overrides */
+h2 {
+    margin-bottom: 30px;
+}
+h3 {
+    margin: 30px 0;
+}
+#teamTables h3 {
+    margin: 30px 0 0;
+}
+#teamTables .table {
+    margin-bottom: 0;
+}
+.nav-tabs {
+    margin-top: 30px;
+}
+.btn-link {
+    color: #2882D0;
+}
+.btn-primary {
+    background-color: #2882D0;
+}
+.btn {
+    border-radius: 0;
+}
+.btn.btn-primary:hover {
+    border: 1px solid #2882D0;
+    background-color: #FFF;
+    color: #2882D0;
+}
+.btn.btn-danger:hover {
+    border: 1px solid #d9534f;
+    background-color: #FFF;
+    color: #d9534f;
+}
+.btn-link:hover {
+    color: #2882D0;
+}
+#draftNav {
+    clear: both;
+}
+.nav-tabs {
+    border-top: 1px solid #ddd;
+}
+.nav-tabs > li > a {
+    color: #333;
+    border-radius: 0;
+    border: 0;
+    cursor: pointer;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    border: none;
+    border-bottom: 3px solid #333;
+    padding-bottom: 7px;
+
+}
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus {
+    color: #2882D0;
+    border: 0;
+    border-bottom: 3px solid #2882D0;
+    padding-bottom: 7px;
+    background-color: #fff;
+}
+
+.form-control {
+    border-radius: 0;
+}
+.form-control:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+fieldset {
+    margin-top: 10px;
+    width: 100%;
+    float: left;
+    margin-bottom: 30px;
+}
+legend {
+    border: 0;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 700;
+}
+hr {
+    clear: left;
+}

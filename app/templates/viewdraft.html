@@ -1,0 +1,66 @@
+<div ng-show="dc.tabs.ownerView == 'active'">
+	<h3>{{ vm.OWNERS_TEXT }}</h3>
+	<table class="table">
+		<thead>
+			<tr>
+			<th>Owner Name</th>
+			<th>Team Name</th>
+			<th>Draft Position</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="owner in vm.currentDraft.owners | orderBy : 'draftPosition'">
+				<td>{{ owner.ownerName }}</td>
+				<td>{{ owner.nickname }}</td>
+				<td>{{ owner.draftPosition }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<a class="btn btn-link" ng-click="goToTop()">Back to Top</a>
+</div>
+<div ng-show="dc.tabs.teamView == 'active'">
+	<div id="teamTables">
+		<div class="col-md-4" ng-class="{onTheClock: (owner.ownerName == vm.currentDraft.draft.onTheClockTeam.ownerName)}" ng-repeat="owner in vm.currentDraft.owners | orderBy : 'draftPosition'">
+			<h3>{{ owner.ownerName }}</h3>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Pos.</th>
+						<th>Player</th>
+						<th>Round / Pick</th>
+						<th>Overall</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="keeper_{{ owner.QB.isKeeper }}">
+						<td>QB</td><td>{{ owner.QB.nameTeam }}</td><td><span ng-show="owner.QB.nameTeam">{{ (owner.QB.pick/owners.length) || 0 | currentRound }} / {{ owner.QB.pick%owners.length || owners.length }}</span></td><td><span ng-show="owner.QB.nameTeam">{{ owner.QB.pick }}</span></td>
+					</tr>
+					<tr ng-repeat="rb in owner.RB" class="keeper_{{ rb.isKeeper }}">
+						<td>RB{{ $index+1 }}</td><td>{{ rb.nameTeam }}</td><td><span ng-show="rb.nameTeam">{{ (rb.pick/owners.length) || 0 | currentRound }} / {{ rb.pick%owners.length || owners.length }}</span></td><td><span ng-show="rb.nameTeam">{{ rb.pick }}</span></td>
+					</tr>
+					<tr ng-repeat="wr in owner.WR" class="keeper_{{ wr.isKeeper }}">
+						<td>WR{{ $index+1 }}</td><td>{{ wr.nameTeam }}</td><td><span ng-show="wr.nameTeam">{{ (wr.pick/owners.length) || 0 | currentRound }} / {{ wr.pick%owners.length || owners.length }}</span></td><td><span ng-show="wr.nameTeam">{{ wr.pick }}</span></td>
+					</tr>
+					<tr class="keeper_{{ owner.TE.isKeeper }}">
+						<td>TE</td><td>{{ owner.TE.nameTeam }}</td><td><span ng-show="owner.TE.nameTeam">{{ (owner.TE.pick/owners.length) || 0 | currentRound }} / {{ owner.TE.pick%owners.length || owners.length }}</span></td><td><span ng-show="owner.TE.nameTeam">{{ owner.TE.pick }}</span></td>
+					</tr>
+					<tr class="keeper_{{ owner.FLEX.isKeeper }}">
+						<td>FLEX</td><td>{{ owner.FLEX.nameTeam }}</td><td><span ng-show="owner.FLEX.nameTeam">{{ (owner.FLEX.pick/owners.length) || 0 | currentRound }} / {{ owner.FLEX.pick%owners.length || owners.length }}</span></td><td><span ng-show="owner.FLEX.nameTeam">{{ owner.FLEX.pick }}</span></td>
+					</tr>
+					<tr class="keeper_{{ owner.DEF.isKeeper }}">
+						<td>DEF</td><td>{{ owner.DEF.nameTeam }}</td><td><span ng-show="owner.DEF.nameTeam">{{ (owner.DEF.pick/owners.length) || 0 | currentRound }} / {{ owner.DEF.pick%owners.length || owners.length }}</span></td><td><span ng-show="owner.DEF.nameTeam">{{ owner.DEF.pick }}</span></td>
+					</tr>
+					<tr class="keeper_{{ owner.K.isKeeper }}">
+						<td>K</td><td>{{ owner.K.nameTeam }}</td><td><span ng-show="owner.K.nameTeam">{{ (owner.K.pick/owners.length) || 0 | currentRound }} / {{ owner.K.pick%owners.length || owners.length }}</span></td><td><span ng-show="owner.K.nameTeam">{{ owner.K.pick }}</span></td>
+					</tr>
+					<tr ng-repeat="be in owner.BE" class="keeper_{{ be.isKeeper }}">
+						<td>BE{{ $index+1 }}</td><td>{{ be.nameTeam }}</td><td><span ng-show="be.nameTeam">{{ (be.pick/owners.length) || 0 | currentRound }} / {{ be.pick%owners.length || owners.length }}</span></td><td><span ng-show="be.nameTeam">{{ be.pick }}</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<a class="btn btn-link" ng-click="goToTop()">Back to Top</a>
+</div>
+
+

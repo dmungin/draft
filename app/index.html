@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="draftApp">
+<head>
+	<title>2015 Draft</title>
+	<link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="../css/tablesort.css" type="text/css" rel="stylesheet">
+    <link href="../css/draft.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<a id="top"></a>
+<!-- HEADER AND NAVBAR -->
+<header>
+	<nav class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/">Draft Application</a>
+		</div>
+
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="/"><i class="fa fa-home"></i> View Drafts</a></li>
+			<li><a href="#adddraft"><i class="fa fa-shield"></i> Add Draft</a></li>
+		</ul>
+	</div>
+	</nav>
+</header>
+
+<div id="main" class="container" ng-controller="DraftController as dc">
+	<div id="selectDraftHeader" ng-show="!dc.currentDraft.draft">
+        <h2>Select Draft</h2>
+        <form id="chooseDraft" role="form">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="drafts" class="sr-only">Drafts</label>
+                    <select id="drafts" class="form-control" ng-change="!dc.selectedDraft || dc.initializeSelectedDraft(dc.selectedDraft);" ng-model="dc.selectedDraft" ng-options="draft.leagueName for draft in dc.drafts">
+                        <option value="">-- Choose A Draft --</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="selectedDraftHeader" ng-show="dc.currentDraft.draft" ng-cloak>
+        <h2 >{{dc.currentDraft.draft.leagueName}}</h2>
+        <a class="btn btn-link" href="/" ng-click="dc.currentDraft.draft = undefined; dc.setTabs('none')">Change League</a>
+    </div>
+	<div>
+		<ul id="draftNav" class="nav nav-tabs" role="tablist" ng-show="dc.currentDraft.draft" ng-cloak>
+			<li class="{{ dc.tabs.ownerView }}"><a href="#viewdraft" ng-click="dc.setTabs('ownerView')">View Owners</a></li>
+			<li class="{{ dc.tabs.ownerEdit }}"><a href="#editowners" ng-click="dc.setTabs('ownerEdit')">Edit Owners</a></li>
+			<li class="{{ dc.tabs.teamView }}"><a href="#viewdraft" ng-click="dc.setTabs('teamView')">View Teams</a></li>
+			<li class="{{ dc.tabs.keeperEdit }}"><a href="#keepers" ng-click="dc.setTabs('keeperEdit')">Manage Keepers</a></li>
+			<li class="{{ dc.tabs.draft }}"><a href="#draft" ng-click="dc.setTabs('draft')">Live Draft</a></li>
+			<li class="{{ dc.tabs.livePicks }}"><a href="#livePicks" ng-click="dc.setTabs('livePicks')">Pick List</a></li>
+		</ul>
+		<!-- this is where content will be injected -->
+		<div ng-view></div>
+	</div>
+</div>
+    <script src="bundle.min.js"></script>
+</body>
+</html>

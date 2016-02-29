@@ -1,0 +1,12 @@
+<h3>Live Picks</h3>
+<div id="picksTable">
+	<div ng-repeat="player in pm.currentDraft.draft.pickList.slice(1)" style="width: {{100/pm.currentDraft.owners.length}}%" class="pick {{player.position}}">
+        <div>{{player.pick}}</div>
+        <div>{{player.nameTeam}}</div>
+        <div>{{player.position}}</div>
+    </div>
+
+</div>
+<a class="btn btn-link" ng-click="goToTop()">Back to Top</a>
+
+

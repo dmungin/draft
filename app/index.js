@@ -1,0 +1,14 @@
+'use strict';
+require('angular');
+require('angular-route');
+require('./vendor/timer');
+require('angular-tablesort');
+require('./app');
+require('./router');
+require('./controllers/AddDraftController');
+require('./controllers/DraftController');
+require('./controllers/EditOwnersController');
+require('./controllers/KeepersController');
+require('./controllers/LiveController');
+require('./controllers/PicksController');
+require('./controllers/ViewDraftController');

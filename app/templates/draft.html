@@ -1,0 +1,137 @@
+
+<form id="liveDraftForm" class="form-horizontal" role="form">
+	<div class="row">
+		<div class="form-group col-md-6">
+			<label class="col-md-4 control-label">Overall Pick</label>
+			<div class="col-md-8">
+				<p class="form-control-static">{{ lm.currentDraft.draft.currentPick }}</p>
+			</div>
+		</div>
+		<div class="form-group col-md-6">
+			<label class="col-md-4 control-label">Round / Pick</label>
+			<div class="col-md-8">
+				<p class="form-control-static">{{ lm.currentDraft.draft.currentPick/lm.currentDraft.owners.length | currentRound }} / {{ lm.draft.currentDraft.draft.currentPick % lm.currentDraft.owners.length || lm.currentDraft.owners.length}}</p>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group col-md-6">
+			<label class="col-md-4 control-label">On The Clock</label>
+			<div class="col-md-8">
+				<div ng-show="!pickOverride">
+					<p class="form-control-static">
+						{{ lm.currentDraft.draft.onTheClockTeam.ownerName }}
+						<a ng-show="lm.currentDraft.draft.onTheClockTeam.ownerName" class="btn btn-link" ng-click="lm.pickOverride = true">Override</a>
+					</p>
+					<div id="timerControls">
+						<timer autostart="false" interval="1000">{{mminutes}}:{{sseconds}}</timer>
+						<div>
+							<a class="btn btn-link" ng-click="lm.startTimer()">Start Timer</a>
+							<a class="btn btn-link" ng-click="lm.stopTimer()">Stop Timer</a>
+						</div>
+					</div>
+				</div>
+				<select id="pickOverrideSelect" ng-show="lm.pickOverride" class="form-control" ng-change="lm.pickOverride = false" ng-model="lm.currentDraft.draft.onTheClockTeam" ng-options="owner.ownerName for owner in lm.currentDraft.owners"></select>
+			</div>
+		</div>
+		<div class="form-group col-md-6">
+			<label class="col-md-4 control-label">Last Pick</label>
+			<div class="col-md-8">
+				<p class="form-control-static"> 
+					{{ lm.currentDraft.draft.pickList[lm.currentDraft.draft.currentPick-1].nameTeam || "No Picks Yet" }}
+					<a ng-show="lm.currentDraft.draft.pickList[lm.currentDraft.draft.currentPick-1].nameTeam" class="btn btn-link" ng-click="lm.removePick()">Unpick</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<hr />
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="teamFilter" class="col-md-4 control-label">Team Filter</label>
+            <div class="col-md-6">
+                <select id="teamFilter" class="form-control" ng-model="lm.teamFilter" ng-options="team.abbreviation for team in lm.TEAM_LIST">
+                    <option value="">-Team-</option>
+                </select>
+            </div>
+        </div>
+    </div>
+	<div id="positionFilters">
+		<a class="btn" ng-class="{true: 'btn-primary', false:'btn-danger'}[lm.toggleAll]" ng-click="toggleAll = !toggleAll; lm.flexShow = lm.toggleAll; lm.rbShow = lm.toggleAll; lm.wrShow = lm.toggleAll; lm.teShow = lm.toggleAll; lm.qbShow = lm.toggleAll; lm.defShow = lm.toggleAll; lm.kShow = lm.toggleAll;">Toggle All</a>
+		<a class="btn" ng-class="{true: 'btn-primary', false:'btn-danger'}[lm.qbShow]" ng-click="lm.qbShow = !lm.qbShow">QB</a>
+		<a class="btn" ng-class="{true: 'btn-primary', false:'btn-danger'}[lm.rbShow]" ng-click="lm.rbShow = !lm.rbShow">RB</a>
+		<a class="btn" ng-class="{true: 'btn-primary', false:'btn-danger'}[lm.wrShow]" ng-click="lm.wrShow = !lm.wrShow">WR</a>
+		<a class="btn" ng-class="{true: 'btn-primary', false:'btn-danger'}[lm.teShow]" ng-click="lm.teShow = !lm.teShow">TE</a>
+		<a class="btn" ng-class="{true: 'btn-primary', false:'btn-danger'}[lm.flexShow]" ng-click="lm.flexShow = !lm.flexShow; lm.rbShow = lm.flexShow; lm.wrShow = lm.flexShow; lm.teShow = lm.flexShow">FLEX</a>
+		<a class="btn" ng-class="{true: 'btn-primary', false:'btn-danger'}[lm.defShow]" ng-click="lm.defShow = !lm.defShow">DEF</a>
+		<a class="btn" ng-class="{true: 'btn-primary', false:'btn-danger'}[lm.kShow]" ng-click="lm.kShow = !lm.kShow">K</a>
+		<a class="btn" ng-class="{true: 'btn-primary', false:'btn-danger'}[lm.showPicked]" ng-click="lm.showPicked = !lm.showPicked">Show Picked</a>
+	</div>
+
+	<div class="row">
+		<div class="form-group col-md-6">
+			<label for="playerSearch" class="col-md-4 control-label">Search Players</label>
+			<div class="col-md-8">
+				<input type="text" id="playerSearch" class="form-control" ng-model="lm.playerFilter" />
+			</div>
+		</div>
+		<div class="col-md-6">
+			<a class="btn btn-link pull-left" ng-click="lm.playerFilter = ''">Clear Search</a>
+			<a class="btn btn-link pull-right" ng-click="lm.addManualPick()">Manual Entry</a>
+		</div>
+	</div>
+	<div class="row" ng-show="manualEntry">
+	<hr />
+		<div class="form-group col-md-4">
+			<label for="newPlayerNameTeam" class="col-md-4 control-label" >Name, Team</label>
+			<div class="col-md-8">
+				<input type="text" id="newPlayerNameTeam" class="form-control" ng-model="lm.manualPlayer.nameTeam" />
+			</div>
+		</div>
+		<div class="form-group col-md-3">
+			<label for="newPlayerPosition" class="col-md-4 control-label">Position</label>
+			<div class="col-md-8">
+				<select id="newPlayerPosition" class="form-control" ng-model="lm.manualPlayer.position">
+					<option value="">-Pos-</option>
+					<option value="QB">QB</option>
+					<option value="RB">RB</option>
+					<option value="WR">WR</option>
+					<option value="TE">TE</option>
+					<option value="DEF">DEF</option>
+					<option value="K">K</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group col-md-2">
+			<a class="btn btn-primary pull-right" ng-click="lm.pickPlayer(manualPlayer)">Pick</a>
+		</div>
+	</div>
+</form>
+
+<table class="table" ts-wrapper>
+	<thead>
+		<tr>
+			<th ts-criteria="rank|parseInt" ts-default>Rank</th>
+			<th ts-criteria="nameTeam">Player</th>
+			<th>Pos. Rank</th>
+            <th ts-criteria="team">Team</th>
+			<th ts-criteria="ADP|parseFloat">ADP</th>
+			<th ts-criteria="vsADP|parseFloat">vsADP</th>
+            <th ts-criteria="depth">Depth</th>
+			<th ts-criteria="points">2014 Pts</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody id="rankings" class="rankings" ng-class="{visibleQB: lm.qbShow, visibleRB: lm.rbShow, visibleWR: lm.wrShow, visibleTE: lm.teShow, visibleDEF: lm.defShow, visibleK: lm.kShow, hidePicked: !lm.showPicked}">
+		<tr ng-repeat="player in lm.currentDraft.draft.players | filter: lm.playerFilter | filter:{team: lm.teamFilter.abbreviation}" class="picked_{{ player.pick > 0 }} {{ player.position }}" ng-class="getPickEligibility(player)" ts-repeat>
+			<td>{{ player.rank }}</td>
+			<td>{{ player.nameTeam }}</td>
+			<td class="{{ player.position }}">{{ player.positionRank }}</td>
+            <td>{{ player.team }}</td>
+			<td>{{ player.ADP }}</td>
+			<td>{{ player.vsADP }}</td>
+            <td>{{ player.depth }}</td>
+			<td>{{ player.points }}</td>
+			<td><a ng-show="!player.pick" class="btn btn-link" ng-click="lm.pickPlayer(player)">Pick</a></td>
+		</tr>
+	</tbody>
+</table>
