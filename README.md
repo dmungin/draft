@@ -9,3 +9,12 @@ The primary focus of the app is:
 	* Assign keepers
 	* Live draft by picking players from the list
 	* View draft results
+
+##Current TODO List
+
+1. Move files to module based organization
+2. Change DB from Mongo to an SQL DB
+3. Update scraping logic to add/update player data in DB instead simply returning to client
+	* Create batch to load updated player rankings nightly
+4. Change to update player info in DB with XREF to owners when picked
+5. 
