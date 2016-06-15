@@ -26,4 +26,3 @@ npm start
 3. Update scraping logic to add/update player data in DB instead simply returning to client
 	* Create batch to load updated player rankings nightly
 4. Change to update player info in DB with XREF to owners when picked
-5. 
