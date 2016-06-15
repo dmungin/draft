@@ -10,7 +10,16 @@ The primary focus of the app is:
 	* Live draft by picking players from the list
 	* View draft results
 
-##Current TODO List
+# Installation
+
+```javascript
+npm install
+```
+```javascript
+npm start
+```
+
+# Current TODO List
 
 1. Move files to module based organization
 2. Change DB from Mongo to an SQL DB
