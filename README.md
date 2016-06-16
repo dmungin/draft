@@ -16,6 +16,9 @@ The primary focus of the app is:
 npm install
 ```
 ```javascript
+webpack
+```
+```javascript
 npm start
 ```
 
