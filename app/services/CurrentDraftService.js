@@ -1,4 +1,3 @@
-
 angular.module('draftApp').factory('currentDraftService', currentDraftService);
 function currentDraftService() {
     var currentDraft = {};
@@ -88,4 +87,3 @@ function currentDraftService() {
         clearCurrentDraft: clearCurrentDraft
     };
 }
-
