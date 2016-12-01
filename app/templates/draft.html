@@ -18,7 +18,7 @@
 		<div class="form-group col-md-6">
 			<label class="col-md-4 control-label">On The Clock</label>
 			<div class="col-md-8">
-				<div ng-show="!pickOverride">
+				<div ng-show="!lm.pickOverride">
 					<p class="form-control-static">
 						{{ lm.currentDraft.draft.onTheClockTeam.ownerName }}
 						<a ng-show="lm.currentDraft.draft.onTheClockTeam.ownerName" class="btn btn-link" ng-click="lm.pickOverride = true">Override</a>
@@ -79,7 +79,7 @@
 			<a class="btn btn-link pull-right" ng-click="lm.addManualPick()">Manual Entry</a>
 		</div>
 	</div>
-	<div class="row" ng-show="manualEntry">
+	<div class="row" ng-show="lm.manualEntry">
 	<hr />
 		<div class="form-group col-md-4">
 			<label for="newPlayerNameTeam" class="col-md-4 control-label" >Name, Team</label>

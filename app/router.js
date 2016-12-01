@@ -13,7 +13,8 @@
             // route for the add draft page
             .when('/adddraft', {
                 templateUrl : 'templates/adddraft.html',
-                controller  : 'AddDraftController'
+                controller  : 'AddDraftController',
+                controllerAs: 'am'
             })
             // route for the edit owners page
             .when('/editowners', {
@@ -30,7 +31,8 @@
             // route for the keepers page
             .when('/keepers', {
                 templateUrl : 'templates/keepers.html',
-                controller  : 'KeepersController'
+                controller  : 'KeepersController',
+                controllerAs: 'km'
             })
             // route for the picks view page
             .when('/livePicks', {

@@ -5,12 +5,12 @@
 			<div class="row">
 				<div class="form-group">
 					<label for="owners">Owners</label>
-					<select id="owners" class="form-control" ng-change="newKeepers = []" ng-model="currentOwner" ng-options="owner.ownerName for owner in dc.owners">
+					<select id="owners" class="form-control" ng-change="newKeepers = []" ng-model="km.currentOwner" ng-options="owner.ownerName for owner in km.currentDraft.owners">
 						<option value="">-- Choose An Owner --</option>
 					</select>
 				</div>
 			</div>
-			<div class="row" ng-show="currentOwner">
+			<div class="row" ng-show="km.currentOwner">
 				<h4>Keepers</h4>
 				<table id="keeperList" class="table">
 					<thead>
@@ -22,25 +22,25 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="keeper in dc.currentDraft.pickList | filter: {ownerID : currentOwner._id, isKeeper : true} : true">
+						<tr ng-repeat="keeper in km.currentDraft.pickList | filter: {ownerID : currentOwner._id, isKeeper : true} : true">
 							<td>{{ keeper.spot }}</td>
 							<td>{{ keeper.nameTeam }}</td>
 							<td>{{ keeper.pick }}</td>
 							<td>
-								<a class="btn btn-link" ng-click="removeKeeper(keeper)">Delete</a>
+								<a class="btn btn-link" ng-click="km.removeKeeper(keeper)">Delete</a>
 							</td>
 						</tr>
-						<tr ng-repeat="nKeeper in newKeepers">
+						<tr ng-repeat="nKeeper in km.newKeepers">
 							<td>
-								<select id="{{ nKeeper.rank }}_rosterSpot" class="form-control" ng-change="" ng-model="nKeeper.spot" ng-options="spot for spot in ROSTER_SPOTS | eligible:nKeeper:currentOwner">
+								<select id="{{ nKeeper.rank }}_rosterSpot" class="form-control" ng-change="" ng-model="nKeeper.spot" ng-options="spot for spot in km.ROSTER_SPOTS">
 									<option value="">-Spot-</option>
 								</select>
 							</td>
 							<td>{{ nKeeper.nameTeam }}</td>
 							<td><input type="text" id="{{ nKeeper.rank }}_pick" class="form-control" ng-model="nKeeper.pick" /></td>
 							<td>
-								<button class="btn btn-primary" ng-click="saveKeeper(nKeeper)">Save</button>
-								<a class="btn btn-link" ng-click="removeNewKeeper(nKeeper)">Delete</a>
+								<button class="btn btn-primary" ng-click="km.saveKeeper(nKeeper)">Save</button>
+								<a class="btn btn-link" ng-click="km.removeNewKeeper(nKeeper)">Delete</a>
 							</td>
 						</tr>
 					</tbody>
@@ -49,10 +49,10 @@
 			
 		</div>
 		<div class="col-md-5 col-md-offset-1">
-			<div ng-show="currentOwner">
+			<div ng-show="km.currentOwner">
 				<div class="form-group">
 					<label for="playerSearch">Search Players</label>
-					<input type="text" id="playerSearch" class="form-control" ng-model="playerFilter" />
+					<input type="text" id="playerSearch" class="form-control" ng-model="km.playerFilter" />
 				</div>
 				<table id="playerList" class="table">
 					<thead>
@@ -61,10 +61,10 @@
 							<th></th>
 						</tr>
 					</thead>
-					<tbody ng-show="playerFilter.length > 1">
-						<tr ng-repeat="player in currentDraft.players | filter: playerFilter" class="picked_{{!!player.pick}}">
+					<tbody ng-show="km.playerFilter.length > 1">
+						<tr ng-repeat="player in km.currentDraft.draft.players | filter: km.playerFilter" class="picked_{{!!player.pick}}">
 							<td>{{ player.nameTeam }}</td>
-							<td><a class="btn btn-link" ng-click="addKeeper(player)" ng-show="!player.pick">Add</a></td>
+							<td><a class="btn btn-link" ng-click="km.addKeeper(player)" ng-show="!player.pick">Add</a></td>
 						</tr>
 					</tbody>
 				</table>

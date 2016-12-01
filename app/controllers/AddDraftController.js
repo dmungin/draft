@@ -26,7 +26,7 @@
         function addDraft() {
             vm.addSuccess = false;
             vm.addFailure = false;
-            /*draftService.addDraft(vm.newDraft).then(
+            draftService.addDraft(vm.newDraft).then(
                 function(answer) {
                     vm.addSuccess = true;
                     $scope.dc.refreshDrafts();
@@ -38,7 +38,7 @@
                     vm.addFailure = true;
                     console.log('Status: '+reason);
                 }
-            );*/
+            );
         }
     }
 })();

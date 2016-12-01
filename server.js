@@ -277,7 +277,7 @@ function getPlayers(res, err, result) {
 			var newPlayer, $row, byeText, teamBye;
 				$ = cheerio.load(html);
 
-			$('#data tr:not(.table-ad)').each(function(){
+			$('#data tr:not(.static)').each(function(){
 		        $row = $(this);
 		        newPlayer = new Player();
 				newPlayer.rank = $row.find('td').eq(0).text().trim(); 
